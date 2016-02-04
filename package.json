@@ -1,0 +1,16 @@
+{
+  "name": "sqli-cordova-disk-space-plugin",
+  "version": "1.0.0",
+  "contributors": [
+    {
+      "name": "Damien Guérin",
+      "email": "dguerin@sqli.com"
+    }
+  ],
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-windows"
+  ]
+}
