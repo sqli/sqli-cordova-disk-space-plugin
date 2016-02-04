@@ -4,7 +4,7 @@ This plugin allows to get information about disk space in Android / iOS / Window
 ## Installation
 To use this plugin in a project, you have to do:
 
-	cordova plugin add git@gitlab-toulouse.sqli.com:ah-techpub/sqli-cordova-disk-space-plugin.git
+	cordova plugin add https://github.com/sqli/sqli-cordova-disk-space-plugin.git
 
 Add your platforms targeted:
 
