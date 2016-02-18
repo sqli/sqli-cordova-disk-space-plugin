@@ -20,9 +20,9 @@
     NSUInteger sizeLibrairies = [self getDirectoryFileSize:documentsURL];
     
     NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
-    [result setObject:[NSNumber numberWithLong:total] forKey:@"total"];
+    [result setObject:[NSNumber numberWithDouble:total] forKey:@"total"];
     [result setObject:[NSNumber numberWithInt:(sizeDocuments+sizeLibrairies)] forKey:@"app"];
-    [result setObject:[NSNumber numberWithLong:free] forKey:@"free"];
+    [result setObject:[NSNumber numberWithDouble:free] forKey:@"free"];
     
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:result];
     
