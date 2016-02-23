@@ -26,9 +26,17 @@
 
 	<!-- windows -->
     <platform name="windows">
+        <config-file target="config.xml" parent="/*">
+            <feature name="DiskSpacePlugin">
+                <param name="windows-package" value="DiskSpacePlugin"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
         <js-module src="src/windows/DiskSpacePluginProxy.js" name="DiskSpacePluginProxy">
             <merges target="" />
         </js-module>
+		
+		<framework src="src/windows/DiskSpacePluginProxy.winmd" target-dir="libs" custom="true"/>
     </platform>
 	
     <!-- ios -->
