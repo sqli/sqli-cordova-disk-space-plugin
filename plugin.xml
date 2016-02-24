@@ -36,7 +36,7 @@
             <merges target="" />
         </js-module>
 		
-		<framework src="src/windows/DiskSpacePluginProxy.winmd" target-dir="libs" custom="true"/>
+		<framework src="src/windows/DiskSpaceLibrary.winmd" target-dir="libs" custom="true"/>
     </platform>
 	
     <!-- ios -->

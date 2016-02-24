@@ -5,7 +5,7 @@ var DiskSpacePlugin = require('./DiskSpacePlugin');
 module.exports = {
 	
 	info:function(successCallback, errorCallback) {
-        DiskSpacePluginProxy.DiskSpacePlugin.info('').then(function (success) {
+        DiskSpaceLibrary.DiskSpace.info('').then(function (success) {
 			if (success && typeof success === 'string') {
 				success = JSON.parse(success);
 			}
