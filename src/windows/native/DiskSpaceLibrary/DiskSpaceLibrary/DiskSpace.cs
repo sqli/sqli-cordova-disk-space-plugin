@@ -6,12 +6,18 @@ using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Storage;
-using Windows.Storage.FileProperties;
 
 namespace DiskSpaceLibrary
 {
     public sealed class DiskSpace
     {
+
+        internal static readonly StorageFolder[] APP_FOLDERS = {
+            ApplicationData.Current.LocalFolder,
+            ApplicationData.Current.RoamingFolder,
+            ApplicationData.Current.TemporaryFolder
+        };
+
         [DataContract]
         internal class Result
         {
@@ -24,29 +30,17 @@ namespace DiskSpaceLibrary
         }
 
         // Manually compute total size of the given StorageFolder
-        private async static Task<ulong> sizeFolder(StorageFolder folder)
+        private static ulong sizeFolder(StorageFolder folder)
         {
             ulong folderSize = 0;
             try
             {
-                var queryOption = new Windows.Storage.Search.QueryOptions();
-                queryOption.FolderDepth = Windows.Storage.Search.FolderDepth.Deep;
-                var storageFileQueryResult = folder.CreateFileQueryWithOptions(queryOption);
+                DirectoryInfo dirInfo = new DirectoryInfo(folder.Path);
 
-                IReadOnlyCollection<StorageFile> files = await storageFileQueryResult.GetFilesAsync();
-
-                List<Task<BasicProperties>> tasks = new List<Task<BasicProperties>>();
-                foreach (StorageFile file in files)
+                // Get back a prefilled (with size) list of files contained in given folder
+                foreach (var fileInfo in dirInfo.EnumerateFiles("*", SearchOption.AllDirectories))
                 {
-                    tasks.Add(file.GetBasicPropertiesAsync().AsTask());
-                }
-
-                Task.WaitAll(tasks.ToArray());
-
-                // Once all file properties have been found, compute size
-                foreach (Task<BasicProperties> task in tasks)
-                {
-                    folderSize += task.Result.Size;
+                    folderSize += (ulong)fileInfo.Length;
                 }
             }
             catch (Exception e)
@@ -76,18 +70,12 @@ namespace DiskSpaceLibrary
         {
             Result result = new Result();
 
-            var tasks = new Task<ulong>[3];
             // Run folder discovery into another Thread to not block UI Thread
-            await Task.Run(async () =>
-            {
-                tasks[0] = sizeFolder(ApplicationData.Current.LocalFolder);
-                tasks[1] = sizeFolder(ApplicationData.Current.RoamingFolder);
-                tasks[2] = sizeFolder(ApplicationData.Current.TemporaryFolder);
+            await Task.Run(() => {
 
-                await Task.WhenAll(tasks);
-                foreach (var sizeTask in tasks)
+                foreach (var folder in APP_FOLDERS)
                 {
-                    result.app += sizeTask.Result;
+                    result.app += sizeFolder(folder);
                 }
             });
 
