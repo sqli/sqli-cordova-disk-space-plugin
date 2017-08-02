@@ -16,3 +16,22 @@ C:\eTechPub-Mobile\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLi
 C:\eTechPub-Mobile\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\qualifiers.txt
 C:\eTechPub-Mobile\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\qualifiers.txt.intermediate
 C:\eTechPub-Mobile\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\MultipleQualifiersPerDimensionFound.txt
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\bin\x64\Release\DiskSpaceLibrary.winmd
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\bin\x64\Release\DiskSpaceLibrary.pdb
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\bin\x64\Release\DiskSpaceLibrary.pri
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\DiskSpaceLibrary.csprojResolveAssemblyReference.cache
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\DiskSpaceLibrary.winmd
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\DiskSpaceLibrary.pdb
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\DiskSpaceLibrary.winmdobj
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\DiskSpaceLibrary.compile.pdb
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\priconfig.xml
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\priconfig.xml.intermediate
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\layout.resfiles
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\layout.resfiles.intermediate
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\resources.resfiles
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\resources.resfiles.intermediate
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\pri.resfiles
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\pri.resfiles.intermediate
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\qualifiers.txt
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\qualifiers.txt.intermediate
+C:\VS Projects\GitHub\sqli-cordova-disk-space-plugin\src\windows\native\DiskSpaceLibrary\DiskSpaceLibrary\obj\x64\Release\MultipleQualifiersPerDimensionFound.txt
