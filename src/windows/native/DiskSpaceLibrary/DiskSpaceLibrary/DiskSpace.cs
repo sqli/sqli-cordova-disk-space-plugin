@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Storage;
+using Windows.Data.Json;
 
 namespace DiskSpaceLibrary
 {
@@ -18,14 +18,10 @@ namespace DiskSpaceLibrary
             ApplicationData.Current.TemporaryFolder
         };
 
-        [DataContract]
         internal class Result
         {
-            [DataMember]
             internal ulong app = 0;
-            [DataMember]
             internal ulong total = 0;
-            [DataMember]
             internal ulong free = 0;
         }
 
@@ -77,14 +73,15 @@ namespace DiskSpaceLibrary
             });
 
             // Return JSON Result
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Result));
-            MemoryStream outputMs = new MemoryStream();
-            serializer.WriteObject(outputMs, result);
 
-            outputMs.Position = 0;
-            StreamReader sr = new StreamReader(outputMs);
+            //DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Result));
+            //MemoryStream outputMs = new MemoryStream();
+            //serializer.WriteObject(outputMs, result);
 
-            return sr.ReadToEnd();
+            //outputMs.Position = 0;
+            //StreamReader sr = new StreamReader(outputMs);
+
+            return JsonConvert.SerializeObject(result);
 
         }
     }
