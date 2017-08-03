@@ -29,28 +29,6 @@ namespace DiskSpaceLibrary
             internal ulong free = 0;
         }
 
-        // Manually compute total size of the given StorageFolder
-        private static ulong sizeFolder(StorageFolder folder)
-        {
-            ulong folderSize = 0;
-            try
-            {
-                DirectoryInfo dirInfo = new DirectoryInfo(folder.Path);
-
-                // Get back a prefilled (with size) list of files contained in given folder
-                foreach (var fileInfo in dirInfo.EnumerateFiles("*", SearchOption.AllDirectories))
-                {
-                    folderSize += (ulong)fileInfo.Length;
-                }
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.ToString());
-                return 0;
-            }
-            return folderSize;
-        }
-
         // Return the system FreeSpace and Capacity properties
         private async static Task<IDictionary<string, object>> getExtraProperties()
         {
@@ -71,11 +49,24 @@ namespace DiskSpaceLibrary
             Result result = new Result();
 
             // Run folder discovery into another Thread to not block UI Thread
-            await Task.Run(() => {
+            await Task.Run(async () =>
+            {
 
                 foreach (var folder in APP_FOLDERS)
                 {
-                    result.app += sizeFolder(folder);
+                    var query = folder.CreateFileQuery();
+                    var files = await query.GetFilesAsync();
+                    ulong folderSize = 0;
+                    foreach (Windows.Storage.StorageFile file in files)
+                    {
+                        // Get file's basic properties.
+                        Windows.Storage.FileProperties.BasicProperties basicProperties =
+                            await file.GetBasicPropertiesAsync();
+
+                        folderSize += (ulong)basicProperties.Size;
+                    }
+
+                    result.app += folderSize;
                 }
             });
 
