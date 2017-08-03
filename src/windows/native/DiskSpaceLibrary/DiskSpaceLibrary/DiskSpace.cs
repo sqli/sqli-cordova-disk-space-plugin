@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Storage;
@@ -74,14 +72,12 @@ namespace DiskSpaceLibrary
 
             // Return JSON Result
 
-            //DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Result));
-            //MemoryStream outputMs = new MemoryStream();
-            //serializer.WriteObject(outputMs, result);
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.SetNamedValue("app", JsonValue.CreateNumberValue(result.app));
+            jsonObject.SetNamedValue("free", JsonValue.CreateNumberValue(result.free));
+            jsonObject.SetNamedValue("total", JsonValue.CreateNumberValue(result.total));
 
-            //outputMs.Position = 0;
-            //StreamReader sr = new StreamReader(outputMs);
-
-            return JsonConvert.SerializeObject(result);
+            return jsonObject.ToString();
 
         }
     }
