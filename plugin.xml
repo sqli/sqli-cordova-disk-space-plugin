@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="sqli-cordova-disk-space-plugin"
-        version="1.0.0">
+        version="1.0.2">
     <name>DiskSpacePlugin</name>
     <description>Disk Space</description>
     <license>MIT</license>
@@ -36,7 +36,9 @@
             <merges target="" />
         </js-module>
 		
-		<framework src="src/windows/DiskSpaceLibrary.winmd" target-dir="libs" custom="true"/>
+		<!--<framework src="src/windows/DiskSpaceLibrary.winmd" target-dir="libs" custom="true"/>-->
+    <framework src="src/windows/native/DiskSpaceLibrary/DiskSpaceLibrary/DiskSpaceLibrary.csproj" custom="true" type="projectReference" versions="10.*" />
+
     </platform>
 	
     <!-- ios -->

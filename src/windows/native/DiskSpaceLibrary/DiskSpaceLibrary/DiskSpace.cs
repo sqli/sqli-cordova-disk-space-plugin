@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Storage;
+using Windows.Data.Json;
 
 namespace DiskSpaceLibrary
 {
@@ -18,37 +16,11 @@ namespace DiskSpaceLibrary
             ApplicationData.Current.TemporaryFolder
         };
 
-        [DataContract]
         internal class Result
         {
-            [DataMember]
             internal ulong app = 0;
-            [DataMember]
             internal ulong total = 0;
-            [DataMember]
             internal ulong free = 0;
-        }
-
-        // Manually compute total size of the given StorageFolder
-        private static ulong sizeFolder(StorageFolder folder)
-        {
-            ulong folderSize = 0;
-            try
-            {
-                DirectoryInfo dirInfo = new DirectoryInfo(folder.Path);
-
-                // Get back a prefilled (with size) list of files contained in given folder
-                foreach (var fileInfo in dirInfo.EnumerateFiles("*", SearchOption.AllDirectories))
-                {
-                    folderSize += (ulong)fileInfo.Length;
-                }
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.ToString());
-                return 0;
-            }
-            return folderSize;
         }
 
         // Return the system FreeSpace and Capacity properties
@@ -71,11 +43,24 @@ namespace DiskSpaceLibrary
             Result result = new Result();
 
             // Run folder discovery into another Thread to not block UI Thread
-            await Task.Run(() => {
+            await Task.Run(async () =>
+            {
 
                 foreach (var folder in APP_FOLDERS)
                 {
-                    result.app += sizeFolder(folder);
+                    var query = folder.CreateFileQuery();
+                    var files = await query.GetFilesAsync();
+                    ulong folderSize = 0;
+                    foreach (Windows.Storage.StorageFile file in files)
+                    {
+                        // Get file's basic properties.
+                        Windows.Storage.FileProperties.BasicProperties basicProperties =
+                            await file.GetBasicPropertiesAsync();
+
+                        folderSize += (ulong)basicProperties.Size;
+                    }
+
+                    result.app += folderSize;
                 }
             });
 
@@ -86,14 +71,13 @@ namespace DiskSpaceLibrary
             });
 
             // Return JSON Result
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Result));
-            MemoryStream outputMs = new MemoryStream();
-            serializer.WriteObject(outputMs, result);
 
-            outputMs.Position = 0;
-            StreamReader sr = new StreamReader(outputMs);
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.SetNamedValue("app", JsonValue.CreateNumberValue(result.app));
+            jsonObject.SetNamedValue("free", JsonValue.CreateNumberValue(result.free));
+            jsonObject.SetNamedValue("total", JsonValue.CreateNumberValue(result.total));
 
-            return sr.ReadToEnd();
+            return jsonObject.ToString();
 
         }
     }
