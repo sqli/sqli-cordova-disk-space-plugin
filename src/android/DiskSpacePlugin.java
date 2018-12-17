@@ -62,7 +62,7 @@ public class DiskSpacePlugin extends CordovaPlugin {
             JSONObject objRes = new JSONObject();
             objRes.put("app", getFolderSize(appDir));
             objRes.put("total", statFs.getTotalBytes());
-            objRes.put("free", statFs.getFreeBytes());
+            objRes.put("free", statFs.getAvailableBytes());
             callbackContext.success(objRes);
         }
 
