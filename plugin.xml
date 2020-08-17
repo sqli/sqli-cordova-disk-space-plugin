@@ -49,7 +49,7 @@
                 <param name="onload" value="true"/>
             </feature>
         </config-file>
-	<source-file src="src/ios/DiskSpacePlugin.h"/>
+        <header-file src="src/ios/DiskSpacePlugin.h"/>
         <source-file src="src/ios/DiskSpacePlugin.m"/>
     </platform>
 </plugin>
