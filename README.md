@@ -21,15 +21,15 @@ Add your platforms targeted:
 Where options is a javascript object:
 
 	location: 1
-        // To get information about external storage (For Android only)
+		// To get information about external storage (For Android only)
 	location: 2
-        // or missing, or any other value (default)
-        // To get information about internal storage (For Android only)
+		// or missing, or any other value (default)
+		// To get information about internal storage (For Android only)
 
-    appFilesPath: cordova.file.dataDirectory
-    appFilesPath: cordova.file.externalDataDirectory
-        // examples using cordova-plugin-file constants here, but can be any path to other app's `files`
-        // To get information about any storage by path, like internal, external, or removable externals / SD cards (For Android only)
+	appFilesPath: cordova.file.dataDirectory
+	appFilesPath: cordova.file.externalDataDirectory
+		// examples using cordova-plugin-file constants here, but can be any path to other app's `files`
+		// To get information about any storage by path, like internal, external, or removable externals / SD cards (For Android only)
 
 The result object is like that:
 
