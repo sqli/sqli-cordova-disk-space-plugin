@@ -38,26 +38,26 @@ public class DiskSpacePlugin extends CordovaPlugin {
     public boolean execute(final String action, JSONArray args,
                            CallbackContext callbackContext) throws JSONException {
 
-        int location = 1;
-        try {
-            location = args.getJSONObject(0).getInt("location");
-        } catch (JSONException e) {
-
-        }
-
         if ("info".equals(action)) {
-            StatFs statFs = null;
-
-            String packageName = this.cordova.getActivity().getPackageName();
-            File appDir = null;
-
-            if (location == 1) {
-                statFs = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
-                appDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Android" + File.separator + "data" + File.separator + packageName + File.separator + "files");
-            } else {
-                statFs = new StatFs(Environment.getDataDirectory().getAbsolutePath());
-                appDir = new File(Environment.getDataDirectory().getAbsolutePath() + File.separator + "data" + File.separator + packageName + File.separator + "files");
+            File appDir = cordova.getContext().getFilesDir();
+            File fsDir = Environment.getDataDirectory();
+            JSONObject options = args.optJSONObject(0);
+            if (options != null) {
+                String appFilesPath = options.optString("appFilesPath").replace("file://", "").replaceFirst("/$", "");
+                if (!appFilesPath.isEmpty()) {
+                    if (!appFilesPath.equals(appDir.getAbsolutePath())) {
+                        appDir = new File(appFilesPath);
+                        fsDir = appDir.getParentFile().getParentFile().getParentFile().getParentFile();
+                    }
+                } else {
+                    int location = options.optInt("location");
+                    if (location == 1) {
+                        appDir = cordova.getContext().getExternalFilesDir(null);
+                        fsDir = appDir.getParentFile().getParentFile().getParentFile().getParentFile();
+                    }
+                }
             }
+            StatFs statFs = new StatFs(fsDir.getAbsolutePath());
 
             JSONObject objRes = new JSONObject();
             objRes.put("app", getFolderSize(appDir));
